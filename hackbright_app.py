@@ -20,7 +20,7 @@ def main():
     connect_to_db()
     command = None
     while command != "quit":
-        input_string = raw_input("HBA Database> ")
+        input_string = raw_input("HBA Database > Type student and github to do a lookup, or new_student and first, last github to add a student.  ")
         tokens = input_string.split()
         command = tokens[0]
         args = tokens[1:]
@@ -29,6 +29,13 @@ def main():
             get_student_by_github(*args) 
         elif command == "new_student":
             make_new_student(*args)
+
+def make_new_student(first_name, last_name, github):
+    query = """INSERT into Students values (?, ?, ?)"""
+    DB.execute(query, (first_name, last_name, github))
+    CONN.commit()
+    print "Successfully added student: %s %s"%(first_name, last_name)
+
 
     CONN.close()
 
