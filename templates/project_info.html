@@ -18,10 +18,12 @@
 </head>
 </body>
 
-<h1>STUDENT INFO AHHH!!!!!</h1>
-    <p>Github account: {{github}}</p>
+<h1>PROJECTS ARE THE BEST</h1>
+
 {%for row in rows:%}
-    <p>Project title: <a href="/projects/{{row[1]}}"> {{row[1]}} </a></p>  
+    <p>First Name: {{row[0]}}</p>
+
+    <p>Project Title: {{row[1]}}</p>  
 
     <p>Grade: {{row[2]}}</p>
 {%endfor%}

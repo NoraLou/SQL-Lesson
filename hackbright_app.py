@@ -23,12 +23,21 @@ def get_grade_by_project(title):
     FROM Students INNER JOIN Grades ON (Students.github= Grades.student_github) 
     INNER JOIN Projects ON (Grades.project_title = Projects.title) 
     WHERE title = ?"""
-    for row in DB.execute(query, (title,)):
-    #  row = DB.fetchone()
-        print """\
-        First Name: %s 
-        Project Title: %s
-        Student Grade: %s""" %(row[0], row[1], row[2])
+    DB.execute(query, (title,))
+    projectrows = DB.fetchall()
+    print title
+    return projectrows
+
+
+
+def get_grade_by_project_given_github(github):
+    query = """SELECT Students.github, Projects.title, Grades.grade 
+    FROM Students INNER JOIN Grades ON (Students.github= Grades.student_github) 
+    INNER JOIN Projects ON (Grades.project_title = Projects.title) 
+    WHERE github = ?"""
+    DB.execute(query, (github,))
+    rows = DB.fetchall()
+    return rows
 
 def get_grades_by_first_name(first_name):
     query = """SELECT Students.first_name, Projects.title, Grades.grade 
